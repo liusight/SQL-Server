@@ -91,8 +91,8 @@ if ($send_email -eq 1) {
 
 
 
-
-USE InsightDB
+#Create table on insightDB
+@"USE InsightDB
 GO
 
 /****** Object:  Table [dbo].[server_monitoring]    Script Date: 6/21/2024 11:19:00 AM ******/
@@ -121,5 +121,5 @@ CREATE TABLE [dbo].[server_monitoring](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-
+"
 
