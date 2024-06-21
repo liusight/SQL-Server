@@ -17,7 +17,7 @@ $query = @"
 
 
 
-$instanceMonitoringInfo = Invoke-Sqlcmd -ServerInstance "spvobmsql70" -Database "insightDB" -Query $query -querytimeout 600 -connectiontimeout 60
+$instanceMonitoringInfo = Invoke-Sqlcmd -ServerInstance "DBInstance007" -Database "insightDB" -Query $query -querytimeout 600 -connectiontimeout 60
 
 
 
@@ -74,7 +74,7 @@ ForEach-Object {
        "Failed: $current ID: $currentID"
        $body = "$body $current`r"
        $update_query = "update [insightDB].[dbo].[server_monitoring] set last_notification = getdate() where server_monitoring_id = $currentID"
-       Invoke-Sqlcmd -ServerInstance "spvobmsql70" -Database "insightDB" -Query $update_query -ErrorAction SilentlyContinue -querytimeout 600 -connectiontimeout 60
+       Invoke-Sqlcmd -ServerInstance "DBInstance007" -Database "insightDB" -Query $update_query -ErrorAction SilentlyContinue -querytimeout 600 -connectiontimeout 60
        Write-EventLog -LogName Application -Source 'SQLHealthCheck' -EventID 666 -EntryType Warning -Message "Healthcheck failed $current" -Category 1 -RawData 10,20
     }
 }
@@ -82,7 +82,7 @@ ForEach-Object {
 
 
 if ($send_email -eq 1) {
-    Send-MailMessage -From "spvobmsql70_@liusight.com" -To "support@liusight.com;jane.doe@liusight.com".Split(';') -Subject "Powershell DB Instance Monitor - Server Failed" -Body $body -Priority High -SmtpServer "relay.liusight.com" -credential $anonCredentials
+    Send-MailMessage -From "DBInstance007_@liusight.com" -To "support@liusight.com;jane.doe@liusight.com".Split(';') -Subject "Powershell DB Instance Monitor - Server Failed" -Body $body -Priority High -SmtpServer "relay.liusight.com" -credential $anonCredentials
 }
 
 
@@ -102,7 +102,6 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-@"
 CREATE TABLE [dbo].[server_monitoring](
 	[server_monitoring_id] [int] NOT NULL,
 	[server_name] [varchar](100) NOT NULL,
@@ -121,4 +120,6 @@ CREATE TABLE [dbo].[server_monitoring](
 	[server_monitoring_id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
-GO"
+GO
+
+
