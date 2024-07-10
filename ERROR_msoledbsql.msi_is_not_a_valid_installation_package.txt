@@ -1,0 +1,8 @@
+
+
+
+Error when installing Microsoft Sql Server 2019, cannot find the microsoft OLE DB Driver. "msoledbsql.msi is not a valid installation package"
+
+
+Solution
+Go to programs and features and uninstall the "Microsoft OLE DB Driver for SQL Server" that is there and then let the installer install the new one
