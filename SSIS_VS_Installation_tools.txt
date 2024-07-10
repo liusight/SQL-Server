@@ -1,0 +1,4 @@
+SSIS installation tools
+Install 2019 VS Community Edition https://my.visualstudio.com/Downloads?q=visual%20studio%202019&wt.mc_id=o~msft~vscom~older-downloads
+
+Installe SSIS extension  https://marketplace.visualstudio.com/items?itemName=SSIS.SqlServerIntegrationServicesProjects
